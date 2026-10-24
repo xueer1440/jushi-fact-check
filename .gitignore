@@ -14,8 +14,36 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# 参赛材料与截图不进公开仓库（仅保留在本地）
+# 参赛材料、私人素材与一次性脚本不进公开仓库（文件全部保留在本地磁盘）
 01-提交评委材料/
 02-录播与路演材料/
 03-真实提问截图/
+03-进阶报告/
 04-正式提交填表包/
+assets/*
+!assets/theme.css
+*.docx
+*.pdf
+_check_docx_pdf.py
+_docx2pdf.py
+_fix_rows.py
+_gen_report.py
+_md2docx.py
+_merge_cloud.py
+_run_checkup.py
+_t162.txt
+_t598.txt
+_t71.txt
+_tshort.txt
+启动.bat
+材料总览.md
+开通与报名清单.md
+演示脚本与录屏分镜.md
+社媒分享文案.md
+线上分发方案.md
+路演3分钟.md
+路演8分钟.md
+路演口语版讲稿与23例实测库.md
+验证清单.md
+验证记录.md
+演示例子实测结果.json
