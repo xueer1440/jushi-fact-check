@@ -1,0 +1,36 @@
+[
+  {
+    "key": "coffee_cancer",
+    "keywords": [
+      "咖啡",
+      "致癌"
+    ],
+    "count": 4
+  },
+  {
+    "key": "leftover_nitrite",
+    "keywords": [
+      "隔夜",
+      "亚硝酸盐"
+    ],
+    "count": 4
+  },
+  {
+    "key": "ad_precedent",
+    "keywords": [
+      "最低价",
+      "销量第一",
+      "纯天然",
+      "零添加",
+      "包治",
+      "根治",
+      "一次见效",
+      "祖传",
+      "第一",
+      "顶级",
+      "进口",
+      "99%"
+    ],
+    "count": 2
+  }
+]

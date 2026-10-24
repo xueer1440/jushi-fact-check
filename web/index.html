@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="据实 · 发布前事实核查——发布前，先查实。违禁词按法条判定，事实宣称逐句核验，每条结论均附可追溯的公开出处。">
+<!-- build v4 -->
+<title>据实 · 发布前事实核查</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230052d9'/%3E%3Ctext x='16' y='22' font-size='17' font-weight='600' text-anchor='middle' fill='%23fff' font-family='PingFang SC,sans-serif'%3E据%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f6f7f9; --panel:#fff; --ink:#1a1d21; --ink-2:#4a5057; --ink-3:#7b828b;
+  --line:#e3e6ea; --line-2:#eef0f3;
+  --red:#c62828; --red-bg:#fdecea; --amber:#a2620a; --amber-bg:#fff4e0;
+  --green:#1b6e3c; --green-bg:#e8f5ec; --gray:#596069; --gray-bg:#eff1f4;
+  --brand:#0052d9; --brand-soft:#ecf2fe;
+  --radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.7; font-size:15px;
+  padding-bottom:40px;
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+/* header */
+.top{background:linear-gradient(180deg,#fff,#fbfcfd);border-bottom:1px solid var(--line);padding:22px 0 18px;margin-bottom:18px}
+.brandrow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brand{font-size:23px;font-weight:700;letter-spacing:.3px}
+.brand span{color:var(--brand)}
+.tag{font-size:12px;color:var(--brand);background:var(--brand-soft);padding:2px 8px;border-radius:99px;font-weight:600}
+.sub{color:var(--ink-2);font-size:13.5px;margin-top:6px}
+.promise{margin-top:10px;font-size:13px;color:var(--ink-2);background:#fbfcfd;border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+.promise b{color:var(--ink)}
+
+/* tabs */
+.tabs{display:flex;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:5px;margin-bottom:16px}
+.tab{flex:1;text-align:center;padding:9px 10px;border-radius:9px;font-size:14px;font-weight:600;color:var(--ink-2);cursor:pointer;border:0;background:transparent;transition:.15s}
+.tab:hover{background:#f4f6f8}
+.tab.on{background:var(--brand);color:#fff}
+.tabhint{font-size:12px;font-weight:400;opacity:.75;display:block;margin-top:1px}
+
+/* input */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:16px}
+label.fld{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:8px}
+textarea{width:100%;min-height:118px;border:1px solid var(--line);border-radius:11px;padding:13px 14px;font-size:15px;line-height:1.7;font-family:inherit;resize:vertical;background:#fcfdfe;color:var(--ink)}
+textarea:focus{outline:none;border-color:var(--brand);background:#fff;box-shadow:0 0 0 3px rgba(31,94,255,.08)}
+.examples{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 2px}
+.ex{font-size:12.5px;background:#f2f4f7;border:1px solid var(--line);color:var(--ink-2);padding:5px 10px;border-radius:99px;cursor:pointer;transition:.15s}
+.ex:hover{background:#e9edf3;border-color:#d5dae1}
+.btnrow{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+button.go{background:var(--brand);color:#fff;border:0;padding:11px 22px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:.15s}
+button.go:hover{background:#1a52e0}
+button.go:disabled{background:#b9c4d6;cursor:not-allowed}
+.hint{font-size:12.5px;color:var(--ink-3)}
+
+.upload-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.ghost{background:#fff;border:1px solid var(--line);color:var(--ink-2);padding:7px 12px;border-radius:9px;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
+.ghost:hover{border-color:#c9d6ff;color:var(--brand);background:#fafcff}
+label.ghost{cursor:pointer;user-select:none}
+textarea.dragging{border-color:var(--brand);background:#f3f7ff;box-shadow:0 0 0 3px rgba(31,94,255,.12)}
+.uphint{font-size:12px;color:var(--ink-3)}
+.upstatus{display:none;font-size:12.5px;color:var(--ink-2);background:#f4f7ff;border:1px solid #dde6fb;border-radius:9px;padding:8px 11px;margin-top:9px}
+.upstatus.on{display:block}
+
+/* status */
+.status{font-size:13px;color:var(--ink-2);padding:10px 13px;background:var(--brand-soft);border-radius:10px;margin-bottom:12px;display:none}
+.status.on{display:block}
+.demo-badge{display:inline-block;font-size:11.5px;font-weight:700;color:var(--amber);background:var(--amber-bg);border:1px solid #f0d9ae;padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:middle}
+
+/* headline */
+.summary{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px}
+.summary h2{font-size:17px;line-height:1.55;font-weight:700}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.chip{font-size:12.5px;padding:4px 10px;border-radius:8px;font-weight:600;background:#f2f4f7;color:var(--ink-2)}
+.chip.high{background:var(--red-bg);color:var(--red)}
+.chip.mid{background:var(--amber-bg);color:var(--amber)}
+.chip.low{background:var(--green-bg);color:var(--green)}
+
+/* result item */
+.item{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.item.high{border-left:4px solid var(--red)}
+.item.mid{border-left:4px solid var(--amber)}
+.item.low{border-left:4px solid var(--green)}
+.item.pending{border-left:4px solid #c3c8cf}
+.item-head{padding:14px 16px 10px;display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.badge{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:7px;white-space:nowrap;margin-top:2px}
+.badge.high{background:var(--red-bg);color:var(--red)}
+.badge.mid{background:var(--amber-bg);color:var(--amber)}
+.badge.low{background:var(--green-bg);color:var(--green)}
+.badge.pending{background:var(--gray-bg);color:var(--gray)}
+.badge.refused{background:#eef0f4;color:#5a6270;border:1px solid #d8dde5}
+.sentence{flex:1;min-width:220px;font-size:15px;font-weight:600;line-height:1.6}
+.sentence mark{background:#ffe9a8;color:inherit;padding:0 2px;border-radius:3px}
+.verdict-line{padding:0 16px 12px;font-size:13.5px;color:var(--ink-2)}
+.verdict-line b{color:var(--ink)}
+.vnote{margin-top:6px;font-size:12.5px;color:var(--ink-3);background:#f7f8fa;border-radius:7px;padding:6px 9px;line-height:1.6}
+.fixbox{margin:0 16px 14px;background:#f7fbf8;border:1px solid #d8eadd;border-radius:10px;padding:10px 13px;font-size:13.5px;color:#1c5236}
+.fixbox b{display:block;font-size:12px;color:#2c7a4b;margin-bottom:3px;letter-spacing:.3px}
+
+/* evidence */
+.ev-list{margin:0 16px 14px;border-top:1px dashed var(--line);padding-top:11px}
+.ev{display:block;text-decoration:none;color:inherit;padding:9px 11px;border:1px solid var(--line-2);border-radius:9px;margin-bottom:7px;transition:.15s;background:#fcfdfe}
+.ev:hover{border-color:#c9d6ff;background:#fafcff}
+.ev-t{font-size:13.5px;font-weight:600;line-height:1.5;color:#12306b}
+.ev-m{font-size:11.5px;color:var(--ink-3);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.dot{width:3px;height:3px;border-radius:50%;background:#c3c8cf;display:inline-block}
+.ev-s{font-size:12.5px;color:var(--ink-2);margin-top:5px;line-height:1.6}
+.tagx{font-size:11px;padding:1px 6px;border-radius:5px;background:#eef1f5;color:var(--ink-2)}
+.tagx.sup{background:var(--green-bg);color:var(--green)}
+.tagx.ref{background:var(--red-bg);color:var(--red)}
+.tagx.warn{background:var(--amber-bg);color:var(--amber)}
+
+/* details */
+details.exp{margin:0 16px 14px;border-top:1px dashed var(--line);padding-top:10px}
+details.exp summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--brand);list-style:none;user-select:none}
+details.exp summary::-webkit-details-marker{display:none}
+details.exp summary::before{content:"▸ ";display:inline-block;transition:.15s}
+details.exp[open] summary::before{content:"▾ "}
+.exp-body{margin-top:10px;font-size:12.5px;color:var(--ink-2)}
+.exp h4{font-size:12.5px;font-weight:700;color:var(--ink);margin:12px 0 6px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{text-align:left;padding:6px 7px;border-bottom:1px solid var(--line-2);vertical-align:top}
+th{color:var(--ink-3);font-weight:600;background:#fafbfc;white-space:nowrap}
+td.mono{font-variant-numeric:tabular-nums;color:var(--ink-3);white-space:nowrap}
+.trace-q{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;color:#12306b;word-break:break-all}
+.tl{list-style:none;border-left:2px solid var(--line);padding-left:12px;margin-left:3px}
+.tl li{position:relative;margin-bottom:9px;font-size:12.5px}
+.tl li::before{content:"";position:absolute;left:-17px;top:6px;width:7px;height:7px;border-radius:50%;background:#c3c8cf}
+.tl li.ref::before{background:var(--red)}
+.tl li.sup::before{background:var(--green)}
+.tl .d{color:var(--ink-3);font-variant-numeric:tabular-nums;margin-right:6px}
+
+/* misc */
+.empty{text-align:center;color:var(--ink-3);font-size:13.5px;padding:26px 10px}
+.err{background:var(--red-bg);color:var(--red);padding:12px 14px;border-radius:10px;font-size:13.5px;margin-bottom:12px}
+.cleanbox{background:#fbfdfc;border:1px solid #dcebe1;border-radius:12px;padding:13px 15px;font-size:13px;color:#2c5a41;margin-bottom:12px}
+footer{border-top:1px solid var(--line);margin-top:26px;padding-top:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+footer img.qr{width:78px;height:78px;border-radius:8px;border:1px solid var(--line);background:#fff}
+.fname{font-weight:700;font-size:15px}
+.fsub{font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.disc{font-size:11.5px;color:var(--ink-3);margin-top:14px;line-height:1.65}
+.meta{font-size:11.5px;color:var(--ink-3);padding:0 16px 12px;display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:560px){
+  .brand{font-size:20px}
+  .card{padding:14px}
+  .item-head{padding:12px 13px 8px}
+  .ev-list,.details.exp,.fixbox,.verdict-line,.meta{margin-left:13px;margin-right:13px;padding-left:0;padding-right:0}
+  .fixbox{padding:10px 12px}
+}
+
+</style>
+<link rel="stylesheet" href="/assets/theme.css?v=17">
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brandrow">
+        <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#0052d9"/><text x="16" y="22" font-size="16" font-weight="600" text-anchor="middle" fill="#fff" font-family="PingFang SC,Microsoft YaHei,sans-serif">据</text></svg>
+        <div class="brand">据实<span>发布前事实核查</span></div>
+      </div>
+      <nav class="topnav">
+        <a href="/wall">查证记录</a>
+        <span class="tndot"></span>
+        <a href="/stats">使用统计</a>
+      </nav>
+    </div>
+    <div class="sub">发布前，先查实：逐句核验即将发布的表述与待核实的说法，每条结论均附可追溯的公开出处。</div>
+    <div class="promise">
+      <span class="pline"><span class="ptag">来源</span>只采信<b>权威、可公开核验</b>的来源——政府与监管部门通报、处罚决定、标准原文、原始研究。</span>
+      <span class="pline"><span class="ptag">时效</span>每次核验均<b>实时检索</b>，结论标注检索时间，来源标注发布时间。</span>
+      <span class="pline"><span class="ptag">可查</span>每条结论均可展开<b>取证路径与采信理由</b>；证据不足时不出结论，仅标注<b>「未查到可靠来源」</b>。</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="tabs">
+    <button class="tab on" id="tabBtnCheckup">文案体检<span class="tabhint">核验即将发布的文案</span></button>
+    <button class="tab" id="tabBtnVerify">事实核查<span class="tabhint">核查说法真假与出处</span></button>
+  </div>
+
+  <!-- 体检 -->
+  <section id="panelCheckup">
+    <div class="modenote">发布前先核一遍：<b>违禁词按法条明文判定，事实宣称逐句核验依据</b>，并给出修改建议与法条出处。</div>
+    <div class="card">
+      <div class="fldrow">
+        <label class="fld" for="checkupInput">粘贴或上传即将发布的文案（海报、详情页、朋友圈、口播稿均可）</label>
+        <div class="fldacts">
+          <span class="counter" id="cntCheckup">0 / 1000</span>
+          <button type="button" class="mini" data-clear="checkup">清空</button>
+          <button type="button" class="mini" data-copy="checkup">复制</button>
+        </div>
+      </div>
+      <textarea id="checkupInput" placeholder="例：本店祖传秘方，纯天然零添加，包治颈椎病，全网最低价，销量第一。"></textarea>
+      <div class="examples">
+        <span class="exlabel">示例</span>
+        <span class="ex" data-kind="checkup" data-text="本店祖传秘方，纯天然零添加，包治颈椎病，一次见效，全网最低价，销量第一。老客户都说好，常年回头客不断。">实体店海报 · 典型雷区</span>
+        <span class="ex" data-kind="checkup" data-text="这款除醛喷雾采用日本进口技术，24小时除醛率99%，母婴安全，新房入住必备。">产品功效宣传</span>
+        <span class="ex" data-kind="checkup" data-text="我们是一家开了八年的小面馆，牛肉每天早市现买，汤底熬六小时，人均25元，欢迎中午来吃。">正常文案 · 对照样本</span>
+      </div>
+      <div class="upload-row">
+        <button type="button" class="ghost" data-pick="imgCheckup"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="vertical-align:-2px;margin-right:5px"><path d="M2 5.6h2.3l.9-1.5h5.6l.9 1.5H14v7.1H2V5.6Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><circle cx="8" cy="9" r="2.1" stroke="currentColor" stroke-width="1.2"/></svg>上传海报 / 截图</button>
+        <button type="button" class="ghost" data-pick="txtCheckup"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="vertical-align:-2px;margin-right:5px"><path d="M4 2h5l3 3v9H4V2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 2v3h3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>上传文本</button>
+        <span class="uphint">也可把图片拖到页面任意位置，或 Ctrl+V 粘贴</span>
+        <input type="file" id="imgCheckup" accept="image/*" class="filehide">
+        <input type="file" id="txtCheckup" accept=".txt,.md,text/plain" class="filehide">
+      </div>
+      <div class="upstatus" id="upStatusCheckup"></div>
+      <div class="btnrow">
+        <button class="go" id="btnCheckup">生成体检结果</button>
+        <span class="hint">先筛出风险句式，再优先深查最危险的几句；未深查的标「待核查」，不臆断。</span>
+      </div>
+    </div>
+    <div class="status" id="statusCheckup"></div>
+    <div id="outCheckup"></div>
+  </section>
+
+  <!-- 单句 -->
+  <section id="panelVerify" style="display:none">
+    <div class="modenote">遇到存疑的说法？<b>以权威、可公开核验的来源为依据判断真伪，并逐条附出处</b>；确无依据时，明示「未查到可靠来源」，不下结论。</div>
+    <div class="card">
+      <div class="fldrow">
+        <label class="fld" for="verifyInput">粘贴需要核实的内容</label>
+        <div class="fldacts">
+          <span class="counter" id="cntVerify">0 / 200</span>
+          <button type="button" class="mini" data-clear="verify">清空</button>
+          <button type="button" class="mini" data-copy="verify">复制</button>
+        </div>
+      </div>
+      <textarea id="verifyInput" placeholder="例：隔夜菜亚硝酸盐超标会致癌，千万别吃。（一次核查一条说法，200 字以内）"></textarea>
+      <div class="examples">
+        <span class="exlabel">示例</span>
+        <span class="ex" data-kind="verify" data-text="隔夜菜亚硝酸盐超标会致癌，千万别吃">隔夜菜致癌 · 来源有分歧</span>
+        <span class="ex" data-kind="verify" data-text="有研究说每天喝咖啡会致癌">咖啡致癌 · 原文被误读</span>
+        <span class="ex" data-kind="verify" data-text="下月起全国药店停售某类感冒药">编造新闻 · 查无实据</span>
+      </div>
+      <div class="upload-row">
+        <button type="button" class="ghost" data-pick="imgVerify"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="vertical-align:-2px;margin-right:5px"><path d="M2 5.6h2.3l.9-1.5h5.6l.9 1.5H14v7.1H2V5.6Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><circle cx="8" cy="9" r="2.1" stroke="currentColor" stroke-width="1.2"/></svg>上传群聊截图</button>
+        <button type="button" class="ghost" data-pick="txtVerify"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="vertical-align:-2px;margin-right:5px"><path d="M4 2h5l3 3v9H4V2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 2v3h3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>上传文本</button>
+        <span class="uphint">也可把图片拖到页面任意位置，或 Ctrl+V 粘贴</span>
+        <input type="file" id="imgVerify" accept="image/*" class="filehide">
+        <input type="file" id="txtVerify" accept=".txt,.md,text/plain" class="filehide">
+      </div>
+      <div class="upstatus" id="upStatusVerify"></div>
+      <div class="btnrow">
+        <button class="go" id="btnVerify">开始核查</button>
+        <span class="hint">三轮检索：广泛取证 → 交叉验证 → 溯源一手材料。</span>
+      </div>
+    </div>
+    <div class="status" id="statusVerify"></div>
+    <div id="outVerify"></div>
+  </section>
+
+  <footer>
+    <div class="frow">
+      <div>
+        <div class="fname">据实 · 发布前事实核查</div>
+        <div class="fsub">结论只来自可公开核验的来源；查不到，就明说。</div>
+        <div class="fsub">免费使用 · 免注册 · 查完可再查验</div>
+        <div class="fsub">核查范围：公开可查的事实与广告表述；个人私事、时政、需专业数据库的判断不查——直接拒答，不猜。</div>
+      </div>
+      <nav class="flinks">
+        <a href="/wall">查证记录</a>
+        <a href="/stats">使用统计</a>
+      </nav>
+    </div>
+    <div class="disc">
+      本结果基于权威、可公开核验来源的核查与风险提示，不构成法律意见。<br>
+      每条结论均可展开取证过程与原始出处；检索实时进行，时间以结果页标注为准。
+    </div>
+    <div class="fmeta">
+      <span class="fmeta-left"><span class="fp" title="检索能力由腾讯云元宝搜索提供">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="8.6" cy="8.6" r="5.1" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12.4 12.4 16.6 16.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M6.3 8.7l1.6 1.6 2.9-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        检索支持 元宝搜索
+      </span>
+        <span class="fp" title="作品由 WorkBuddy 开发">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <rect x="3" y="3" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 6.2l1.1 2.4 2.6.3-1.9 1.8.5 2.6-2.3-1.3-2.3 1.3.5-2.6L6.3 8.9l2.6-.3L10 6.2Z" fill="currentColor" opacity=".85"/>
+        </svg>
+<span class="fp-sep">·</span>
+        开发工具 WorkBuddy
+      </span>
+        <span class="fp-sep">·</span>
+        1024超能Coding周末 · 侦探赛道参赛作品 · WaytoAGI · AI切磋大会
+      </span>
+      <span class="fauthor">作者 zengyan</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const SRC = new URLSearchParams(location.search).get("from") || "";
+const MAX_CHARS = 1000;
+// 两个入口的字数上限不同：文案体检是整段文案，事实核查只核一句话/一条说法
+const LIMITS = {checkup: 1000, verify: 200};
+
+// 服务探活：连不上就在顶部提示，不要让用户点了没反应还以为是按钮坏了
+fetch("/api/health", {cache: "no-store"}).then(r => r.json()).catch(() => {
+  const bar = document.createElement("div");
+  bar.style.cssText = "position:fixed;left:0;right:0;top:0;z-index:99;background:#c62828;color:#fff;padding:10px 16px;font-size:14px;text-align:center";
+  bar.textContent = "服务连接失败：请双击项目里的「启动.bat」，再刷新本页";
+  document.body.appendChild(bar);
+});
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const LEVEL_TEXT = {high:"高风险", mid:"需存疑", low:"有依据", pending:"待核查"};
+const VERDICT_TONE = {true:"low", "false":"high", misleading:"mid", unclear:"mid", no_source:"pending", refused:"refused"};
+
+/* ---------- tabs ---------- */
+const btnC = $("#tabBtnCheckup"), btnV = $("#tabBtnVerify");
+const pnlC = $("#panelCheckup"), pnlV = $("#panelVerify");
+function clearUpStatus(kind){
+  const el = kind === "checkup" ? $("#upStatusCheckup") : $("#upStatusVerify");
+  if(el){ el.className = "upstatus"; el.textContent = ""; }
+}
+
+function switchTab(which){
+  const isC = which === "checkup";
+  btnC.classList.toggle("on", isC); btnV.classList.toggle("on", !isC);
+  pnlC.style.display = isC ? "" : "none";
+  pnlV.style.display = isC ? "none" : "";
+  // 切走的面板不留上一段识别提示，免得看着像在说当前这段
+  clearUpStatus(isC ? "verify" : "checkup");
+}
+btnC.onclick = () => switchTab("checkup");
+btnV.onclick = () => switchTab("verify");
+
+document.querySelectorAll(".ex").forEach(el => {
+  el.onclick = () => {
+    const kind = el.dataset.kind;
+    switchTab(kind);
+    const ta = kind === "checkup" ? $("#checkupInput") : $("#verifyInput");
+    ta.value = el.dataset.text;
+    ta.focus();
+  };
+});
+
+/* ---------- helpers ---------- */
+function evidenceHTML(list, opts={}){
+  if(!list || !list.length) return '<div class="ev-m" style="padding:4px 0">没拿到可点开的来源。</div>';
+  return list.map(e => {
+    const tags = [];
+    const firm = (e.authority >= 4 || e.one_hand);
+    if(e.on_topic === false) tags.push('<span class="tagx">未直接涉及</span>');
+    if(e.stance === "support") tags.push(`<span class="tagx sup">${firm ? "支持该说法" : "沾边·不作依据"}</span>`);
+    if(e.stance === "refute") tags.push(`<span class="tagx ref">${firm ? "反驳该说法" : "沾边·不作依据"}</span>`);
+    if(e.interest) tags.push('<span class="tagx warn">利益相关·已降权</span>');
+    if(e.one_hand) tags.push('<span class="tagx">一手材料</span>');
+    const lv = ageLevel(e.date);
+    if(lv === "fresh") tags.push('<span class="tagx tagev-fresh">近一年</span>');
+    if(lv === "old") tags.push('<span class="tagx tagev-old">较早</span>');
+    return `<a class="ev" href="${esc(e.url)}" target="_blank" rel="noopener">
+      <div class="ev-t">${esc(e.title)}</div>
+      <div class="ev-m">
+        <span>${esc(e.site || "未知站点")}</span><span class="dot"></span>
+        <span>${esc(e.date || "无日期")}${srcAge(e.date) ? `（${srcAge(e.date)}）` : ""}</span><span class="dot"></span>
+        <span>权威度 ${e.authority}/5</span>
+        ${tags.join("")}
+      </div>
+      ${opts.snippet && e.snippet ? `<div class="ev-s">${esc(e.snippet).slice(0,150)}…</div>` : ""}
+    </a>`;
+  }).join("");
+}
+
+function traceHTML(trace){
+  if(!trace || !trace.length) return "";
+  const rows = trace.map(t => {
+    if(t.tag === "stop" || t.tag === "demo"){
+      return `<tr><td class="mono">—</td><td colspan="3" style="color:#7b828b">${esc(t.purpose)}</td></tr>`;
+    }
+    return `<tr>
+      <td class="mono">R${t.round}</td>
+      <td><div class="trace-q">${esc(t.query)}</div><div style="color:#7b828b;font-size:11.5px;margin-top:2px">${esc(t.purpose)}</div></td>
+      <td class="mono">${t.count}</td>
+    </tr>`;
+  }).join("");
+  return `<h4>取证路径</h4>
+    <table><thead><tr><th>轮</th><th>查询 / 目的</th><th>新增</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function matrixHTML(matrix){
+  if(!matrix || !matrix.length) return "";
+  const rows = matrix.map(m => `<tr>
+    <td>${m.index}</td>
+    <td>${esc(m.text)}</td>
+    <td class="mono">${m.support}</td>
+    <td class="mono">${m.refute}</td>
+    <td><span class="tagx ${m.tone === "refute" ? "ref" : m.tone === "support" ? "sup" : ""}">${esc(m.state)}</span></td>
+  </tr>`).join("");
+  return `<h4>子主张拆解</h4>
+    <div class="ev-m" style="margin:-2px 0 8px">只统计可采信的来源：主体是同一家、确实在谈这件事；企业信用类只算政府与法院公示。子主张措辞与来源不一致时，按整条说法的来源口径统计。</div>
+    <table><thead><tr><th>#</th><th>子主张</th><th>支持</th><th>反证</th><th>判定</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function conflictHTML(conflict){
+  if(!conflict || !conflict.length) return "";
+  const rows = conflict.map(c => `<tr>
+    <td>${esc(c.stance)}</td>
+    <td><a href="${esc(c.url)}" target="_blank" rel="noopener" style="color:#12306b">${esc(c.site)}</a></td>
+    <td>${esc(c.date || "—")}</td>
+    <td class="mono">${c.authority}</td>
+    <td>${esc(c.one_hand)}</td>
+    <td>${esc(c.interest)}</td>
+    <td class="mono">${c.weight}</td>
+  </tr>`).join("");
+  return `<h4>冲突判决 · 四维对照</h4>
+    <table><thead><tr><th>立场</th><th>来源</th><th>时间</th><th>权威</th><th>一手性</th><th>利益</th><th>权重</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
+}
+
+function timelineHTML(tl, note){
+  if(!tl || !tl.length) return `<h4>溯源</h4><div>${esc(note || "未能追溯到最初出处。")}</div>`;
+  const items = tl.map(t => `<li class="${t.stance === 'refute' ? 'ref' : t.stance === 'support' ? 'sup' : ''}">
+    <span class="d">${esc(t.date)}</span>
+    <a href="${esc(t.url)}" target="_blank" rel="noopener" style="color:#12306b">${esc(t.title).slice(0,60)}</a>
+    <span style="color:#9aa1a9"> · ${esc(t.site || "")}</span></li>`).join("");
+  return `<h4>溯源时间线</h4><ul class="tl">${items}</ul><div style="color:#7b828b">${esc(note || "")}</div>`;
+}
+
+function missingHTML(missing){
+  if(!missing || !missing.length) return "";
+  return `<h4>还需哪些材料才够定论</h4>
+    <ul style="padding-left:18px">${missing.map(m => `<li>${esc(m)}</li>`).join("")}</ul>`;
+}
+
+/* ---------- 输入的清空 / 复制 ---------- */
+function syncCountFor(kind){
+  const f = window.__syncCount && window.__syncCount[kind];
+  if(f) f();
+}
+
+function bindFieldActions(kind){
+  const area = kind === "checkup" ? $("#checkupInput") : $("#verifyInput");
+  if(!area) return;
+
+  // 字数计数：超过上限只提示不拦截，让用户自己决定要不要分段
+  const cnt = document.getElementById("cnt" + kind.charAt(0).toUpperCase() + kind.slice(1));
+  const limit = LIMITS[kind] || MAX_CHARS;
+  const syncCount = () => {
+    if(!cnt) return;
+    const n = area.value.length;
+    cnt.textContent = n + " / " + limit;
+    cnt.classList.toggle("over", n > limit);
+    cnt.title = n > limit
+      ? `超出 ${n - limit} 字，超出部分不参与核对（${kind === "verify" ? "核查一条说法，建议精简到 " + limit + " 字以内" : "建议分段粘贴"}）`
+      : "";
+  };
+  area.addEventListener("input", syncCount);
+  syncCount();
+  // 供识别完成后刷新计数用
+  window.__syncCount = window.__syncCount || {};
+  window.__syncCount[kind] = syncCount;
+
+  document.querySelectorAll('[data-clear="' + kind + '"]').forEach(btn => {
+    btn.onclick = () => { area.value = ""; area.focus(); syncCount(); };
+  });
+
+  document.querySelectorAll('[data-copy="' + kind + '"]').forEach(btn => {
+    btn.onclick = async () => {
+      const text = area.value.trim();
+      if(!text){ area.focus(); return; }
+      let ok = false;
+      // 本地 http / https 走标准 API；手机用内网 IP 访问时降级到 execCommand
+      try{
+        if(navigator.clipboard && window.isSecureContext){
+          await navigator.clipboard.writeText(text);
+          ok = true;
+        }
+      }catch(e){}
+      if(!ok){
+        try{
+          const end = area.value.length;
+          area.focus(); area.select();
+          ok = document.execCommand("copy");
+          area.setSelectionRange(end, end);
+        }catch(e){ ok = false; }
+      }
+      const old = btn.textContent;
+      const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+      btn.textContent = ok ? "已复制" : (isMobile ? "长按文字复制" : "选中后按 Ctrl+C");
+      btn.classList.toggle("done", ok);
+      setTimeout(() => { btn.textContent = old; btn.classList.remove("done"); }, 1600);
+    };
+  });
+}
+bindFieldActions("checkup");
+bindFieldActions("verify");
+
+/* ---------- 上传 / 拖拽 / 粘贴 识别 ---------- */
+function activeKind(){
+  const v = document.querySelector("#tabBtnVerify");
+  return v && v.classList.contains("on") ? "verify" : "checkup";
+}
+
+function fieldOf(kind){
+  return {
+    area: kind === "checkup" ? $("#checkupInput") : $("#verifyInput"),
+    st: kind === "checkup" ? $("#upStatusCheckup") : $("#upStatusVerify")
+  };
+}
+
+function bindUpload(kind){
+  const f0 = fieldOf(kind);
+  const area = f0.area;
+  const img = kind === "checkup" ? $("#imgCheckup") : $("#imgVerify");
+  const txt = kind === "checkup" ? $("#txtCheckup") : $("#txtVerify");
+  if(!area || !img || !txt) return;
+
+  // 状态条若缺失就地补一个：缺一个 div 不该让整个上传功能失效
+  let st = f0.st;
+  if(!st){
+    st = document.createElement("div");
+    st.className = "upstatus";
+    st.id = kind === "checkup" ? "upStatusCheckup" : "upStatusVerify";
+    const row = img.closest(".upload-row");
+    if(row && row.parentNode) row.parentNode.insertBefore(st, row.nextSibling);
+    else area.parentNode.appendChild(st);
+  }
+
+  img.addEventListener("change", () => { if(img.files[0]) doExtract(img.files[0], area, st); img.value = ""; });
+  txt.addEventListener("change", () => { if(txt.files[0]) doExtract(txt.files[0], area, st); txt.value = ""; });
+
+  // 按钮显式触发 input.click()：比 label for 更兼容内嵌 webview
+  [img, txt].forEach(input => {
+    document.querySelectorAll('[data-pick="' + input.id + '"]').forEach(btn => {
+      btn.onclick = () => {
+        // 手机端「上传文本」不弹系统文件选择器：那个选择器固定带「相机 / 照片」入口，
+        // 网页端改不掉（accept 只能筛文件类型，删不了入口项）。手机上真正的用法
+        // 就是复制粘贴，所以这里直接引导粘贴，不再弹带相机的选择器。
+        if (input === txt && /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+          st.className = "upstatus on";
+          st.innerHTML = "手机上直接粘贴更快：长按下面输入框 → 选「粘贴」。需要传 .txt 文件请在电脑上打开本页。";
+          area.focus();
+          try{ area.scrollIntoView({block:"center",behavior:"smooth"}); }catch(e){}
+          return;
+        }
+        try{ input.value = ""; }catch(e){}
+        st.className = "upstatus on";
+        st.textContent = "已尝试打开文件选择框…";
+        try{
+          input.click();
+        }catch(e){
+          st.textContent = "无法打开文件选择框，请把图片直接拖到页面上。";
+          return;
+        }
+        setTimeout(() => {
+          if(input.files.length) return;
+          if(st.textContent.indexOf("已尝试打开") !== 0) return;
+          st.innerHTML = "选择框没弹出来。换这两条路，任一条都行：① 把图片<b>拖到页面任意位置</b>（会出现「松开即可识别」）；② 截图后<b>在输入框里按 Ctrl+V</b>。";
+        }, 1800);
+      };
+    });
+  });
+
+  // 手机端按钮文案跟着改：改叫「粘贴文本」，点了就是引导粘贴
+  if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+    document.querySelectorAll('[data-pick="txtCheckup"],[data-pick="txtVerify"]').forEach(b => {
+      if (b.textContent.indexOf("上传文本") >= 0) b.innerHTML = b.innerHTML.replace("上传文本", "粘贴文本");
+    });
+  }
+
+  // 用户一改字，之前那条「已提取 N 字」就不再指向当前内容
+  area.addEventListener("input", () => {
+    if(st.textContent) { st.className = "upstatus"; st.textContent = ""; }
+  });
+
+  // 输入框内直接粘贴截图
+  area.addEventListener("paste", e => {
+    const items = e.clipboardData && e.clipboardData.items;
+    if(!items) return;
+    for(const it of items){
+      if(it.type && it.type.startsWith("image/")){
+        e.preventDefault();
+        const f = it.getAsFile();
+        if(f) doExtract(f, area, st);
+        return;
+      }
+    }
+  });
+
+}
+
+
+/* 整页拖拽：拖到任何地方都能识别 */
+(function bindGlobalDrop(){
+  let depth = 0;
+  const mask = document.querySelector("#dropMask");
+  const hasFiles = e => e.dataTransfer && Array.from(e.dataTransfer.types || []).indexOf("Files") >= 0;
+  const show = on => { if(mask) mask.classList.toggle("on", on); };
+
+  document.addEventListener("dragenter", e => { if(!hasFiles(e)) return; e.preventDefault(); depth++; show(true); });
+  document.addEventListener("dragover", e => { if(hasFiles(e)) e.preventDefault(); });
+  document.addEventListener("dragleave", e => { depth--; if(depth <= 0){ depth = 0; show(false); } });
+  document.addEventListener("drop", e => {
+    if(!hasFiles(e)) return;
+    e.preventDefault(); depth = 0; show(false);
+    const f = e.dataTransfer.files && e.dataTransfer.files[0];
+    if(!f) return;
+    const f2 = fieldOf(activeKind());
+    if(f2.area && f2.st) doExtract(f, f2.area, f2.st);
+  });
+})();
+
+async function doExtract(file, area, st){
+  const isImg = (file.type || "").startsWith("image/") || /\.(png|jpe?g|webp|bmp)$/i.test(file.name || "");
+  const kind = (area && area.id === "verifyInput") ? "verify" : "checkup";
+  st.className = "upstatus on";
+  st.textContent = isImg ? "正在识别图片里的文字…（约 3–6 秒）" : "正在读取文本…";
+  const fd = new FormData();
+  fd.append("file", file);
+  try{
+    const r = await fetch("/api/extract", {method: "POST", body: fd});
+    const d = await r.json();
+    if(!r.ok) throw new Error(d.error || "识别失败");
+    const text = (d.text || "").trim();
+    area.value = text.slice(0, 4000);
+    if(!text){
+      st.textContent = "没认出文字。换张清晰一点的截图，或直接把话打进输入框。";
+      return;
+    }
+    // 截图查证的完整闭环：认出字就接着查，不再让用户再点一次按钮
+    st.textContent = `已识别 ${d.chars} 字${d.note ? " · " + d.note : ""}，正在核查…`;
+    if(typeof syncCountFor === "function") syncCountFor(kind);
+    if(kind === "verify") runVerify(true);
+    else runCheckup();
+  }catch(e){
+    const netErr = (e instanceof TypeError) || /Failed to fetch|NetworkError|Load failed/i.test(e.message || "");
+    st.textContent = netErr
+      ? "连不上本地服务：确认「启动.bat」的黑窗口还开着，然后刷新页面重试"
+      : "没成功：" + e.message;
+  }
+}
+document.querySelectorAll("#imgCheckup,#imgVerify,#txtCheckup,#txtVerify").forEach(el => {
+  el.addEventListener("click", e => e.stopPropagation());
+});
+bindUpload("checkup");
+bindUpload("verify");
+
+/* ---------- checkup ---------- */
+function checkupItemHTML(item, idx){
+  const lv = item.risk_level || "mid";
+  const tone = LEVEL_TEXT[lv] || lv;
+  const verdictLabel = item.verdict_display || item.verdict_label || "";
+  const openAttr = idx === 0 ? "open" : "";
+  const notes = (item.notes || []).filter(Boolean).map(n => `<div class="vnote">${esc(n)}</div>`).join("");
+  // 违禁词按法条判定，一次都没检索：不显示「依据」「取证过程」，避免暗示查过
+  const isRule = !!item.no_search;
+  return `<div class="item ${lv}">
+    <div class="item-head">
+      <span class="badge ${lv}">${esc(tone)}</span>
+      ${item.issue_type ? `<span class="itype">${esc(item.issue_type)}</span>` : ""}
+      ${isRule ? '<span class="itype">规则判定 · 未检索</span>' : ""}
+      <div class="sentence">${highlight(item.sentence, item.matched)}</div>
+    </div>
+    <div class="verdict-line">
+      <b>${esc(verdictLabel)}</b>${isRule ? "" : `（置信度 ${item.confidence}）`} · ${esc(item.reason)}
+      ${notes}
+    </div>
+    ${(item.fix || "").trim() ? `<div class="fixbox"><b>建议</b>${esc(item.fix)}</div>` : ""}
+    ${isRule ? "" : `<div class="ev-list">
+      <div style="font-size:12px;color:#8b9099;margin-bottom:7px;letter-spacing:.06em">依据 · 点击可核验</div>
+      ${evidenceHTML(item.evidence, {snippet:true})}
+    </div>
+    <details class="exp" ${openAttr}>
+      <summary>查看取证过程</summary>
+      <div class="exp-body">
+        ${missingHTML(item.missing)}
+        ${matrixHTML(item.matrix)}
+        ${conflictHTML(item.conflict)}
+        ${traceHTML(item.trace)}
+      </div>
+    </details>`}
+    <div class="meta">
+      ${isRule
+        ? '<span>法条明文判定 · 未检索</span>'
+        : `<span>本次检索 ${item.searches} 次</span><span>来源 ${item.evidence.length} 条</span>`}
+      ${item.demo ? '<span class="demo-badge">演示数据</span>' : ''}
+      <span>引擎 ${esc(item.provider || "")}</span>
+    </div>
+  </div>`;
+}
+
+function highlight(sentence, matched){
+  const s = esc(sentence);
+  if(!matched) return s;
+  const m = esc(matched);
+  return s.includes(m) ? s.replace(m, `<mark>${m}</mark>`) : s;
+}
+
+async function runCheckup(){
+  clearUpStatus("checkup");
+  const text = $("#checkupInput").value.trim();
+  const out = $("#outCheckup"), st = $("#statusCheckup"), btn = $("#btnCheckup");
+  if(text.length < 6){ out.innerHTML = '<div class="err">内容太短，请补充后再试。</div>'; return; }
+  btn.disabled = true; out.innerHTML = "";
+  st.classList.add("on"); st.textContent = "正在扫违禁词（规则判定，不检索）…";
+
+  try{
+    const resp = await fetch("/api/checkup/stream", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({text, source: SRC})
+    });
+    if(!resp.ok || !resp.body) throw new Error("服务暂时不可用");
+
+    const reader = resp.body.getReader();
+    const dec = new TextDecoder();
+    let buf = "", items = [];
+
+    while(true){
+      const {value, done} = await reader.read();
+      if(done) break;
+      buf += dec.decode(value, {stream:true});
+      let idx;
+      while((idx = buf.indexOf("\n\n")) >= 0){
+        const chunk = buf.slice(0, idx).trim();
+        buf = buf.slice(idx + 2);
+        if(!chunk.startsWith("data:")) continue;
+        const msg = JSON.parse(chunk.slice(5).trim());
+        if(msg.type === "error"){ out.innerHTML = `<div class="err">${esc(msg.message)}</div>`; return; }
+        if(msg.type === "start"){
+          const lexN = msg.lex_sentences || 0, factN = msg.plan ? msg.plan.length : 0;
+          st.textContent = lexN
+            ? `违禁词命中 ${lexN} 句（规则判定，不检索）；另有 ${factN} 句事实宣称待检索核查…`
+            : `未命中违禁词；${factN} 句事实宣称待检索核查…`;
+        }
+        if(msg.type === "stage"){
+          const s = (msg.stage && msg.stage.sentence) || "";
+          st.textContent = `正在核查：${s.slice(0, 18)}…（第 ${items.filter(x => !x.no_search).length + 1} 句）`;
+        }
+        if(msg.type === "item"){
+          items.push(msg.item);
+          renderCheckupProgress(out, items);
+          const n = items.filter(x => !x.no_search).length;
+          st.textContent = n ? `已核查 ${n} 句，继续…` : "违禁词已判定，准备核查事实宣称…";
+        }
+        if(msg.type === "done"){
+          renderCheckupDone(out, msg.result);
+          st.classList.remove("on");
+          st.textContent = "";
+        }
+      }
+    }
+  }catch(e){
+    out.innerHTML = `<div class="err">出错了：${esc(e.message)}。可刷新重试，或改用「事实核查」。</div>`;
+    st.classList.remove("on");
+  }finally{
+    btn.disabled = false;
+  }
+}
+
+function renderCheckupProgress(out, items){
+  out.innerHTML = items.map((it, i) => checkupItemHTML(it, i)).join("");
+}
+
+function lexBlockHTML(r){
+  const lex = r.lex || [];
+  const head = `<div class="lexhead">违禁词命中 <b>${lex.length}</b> 处
+    <span class="lexsub">规则判定 · 法条明文，无需检索</span></div>`;
+  if(!lex.length){
+    return `<div class="lexblock">${head}<div class="lexnone">未命中常见违禁词。</div></div>`;
+  }
+  const rows = lex.map(h => `<tr>
+      <td><b class="${h.level === 'high' ? 'lx-hi' : 'lx-mid'}">${esc(h.word)}</b></td>
+      <td>${esc(h.category)}</td>
+      <td class="lexbasis">${esc(h.basis)}</td>
+      <td>${esc(h.suggest)}</td>
+    </tr>`).join("");
+  return `<div class="lexblock">${head}
+    <table class="lextab"><thead><tr><th>用词</th><th>类别</th><th>依据</th><th>建议</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+
+function chipsHTML(r, c){
+  const lexTotal = (r.lex_summary && r.lex_summary.total) || 0;
+  const typeChips = c.by_type
+    ? Object.keys(c.by_type).filter(k => k !== "违禁词").map(k => `<span class="chip">${esc(k)} ${c.by_type[k]}</span>`)
+    : [];
+  const list = [
+    `<span class="chip">共 ${c.sentences} 句</span>`,
+    c.high ? `<span class="chip high">高风险 ${c.high}</span>` : "",
+    c.mid ? `<span class="chip mid">需修改 ${c.mid}</span>` : "",
+    c.low ? `<span class="chip low">有依据 ${c.low}</span>` : "",
+    c.pending ? `<span class="chip">待核查 ${c.pending}</span>` : "",
+    c.clean ? `<span class="chip">未发现风险 ${c.clean}</span>` : "",
+    `<span class="chip">违禁词 ${lexTotal}</span>`,
+    ...typeChips,
+    `<span class="chip">检索 ${r.searches} 次</span>`,
+    r.demo ? '<span class="chip mid">演示数据</span>' : ""
+  ];
+  return list.filter(Boolean).join("");
+}
+
+function renderCheckupDone(out, r){
+  const c = r.counts;
+  const score = (r.score == null) ? null : Number(r.score);
+  const gcls = score == null ? "" : score >= 85 ? "g-a" : score >= 70 ? "g-b" : score >= 55 ? "g-c" : "g-d";
+  const head = `<div class="summary">
+    <div class="scorebar">
+      <div class="sc ${gcls}" style="--p:${score == null ? 0 : score}"><b>${score == null ? "—" : score}</b><span>${esc(r.grade || "")}</span></div>
+      <h2>${esc(r.headline)}</h2>
+    </div>
+    <div class="chips">${chipsHTML(r, c)}</div>
+  </div>`;
+
+  const items = r.items.map((it, i) => checkupItemHTML(it, i)).join("");
+
+  const pend = r.pending || [];
+  const pendNeed = pend.filter(p => p.needs_search);
+  const pendRule = pend.filter(p => !p.needs_search);
+  const pendBlock = (list, title) => list.length ? `<details class="exp" style="margin:12px 0 0;border-top:1px dashed #e3e6ea">
+    <summary>${title}</summary>
+    <div class="exp-body">${list.map(p => `<div style="margin-bottom:10px">
+      <span class="tagx">${esc(p.label)}</span>
+      <div style="margin-top:3px">${esc(p.sentence)}</div>
+      <div style="color:#7b828b;margin-top:2px">${esc(p.note || "")}</div>
+      ${(p.fix || "").trim() ? `<div style="color:#1d6a4c;margin-top:2px">建议：${esc(p.fix)}</div>` : ""}
+    </div>`).join("")}</div>
+  </details>` : "";
+  const pending = pendBlock(pendNeed, `还有 ${pendNeed.length} 句含事实宣称，需要检索才能判断（本次未排上，所以不给结论）`)
+    + pendBlock(pendRule, `另有 ${pendRule.length} 句属表述风险，规则即可判定（无需检索）`);
+
+  const clean = r.clean && r.clean.length ? `<div class="cleanbox" style="margin-top:12px">
+    ✔ 这 ${r.clean.length} 句没发现常见高风险句式：${esc(r.clean.join("；")).slice(0,160)}
+  </div>` : "";
+
+  const share = r.code ? `<div class="meta" style="padding:0;margin-top:12px">
+    <span>核查编号 #${esc(r.code)}</span>
+    <a href="/q/${esc(r.code)}" target="_blank" style="color:#0052d9">生成可转发的卡片 →</a>
+    <a href="/r/${esc(r.code)}" target="_blank" style="color:#0052d9">导出深度调查报告 →</a>
+  </div>` : "";
+
+  // 超出上限的部分被截掉了，必须明说，不能悄悄少查一段
+  const truncHint = r.truncated ? `<div class="hintbar" style="border-color:#e0a800;background:#fffbe6">
+    <b>只核对了前 ${LIMITS.checkup} 字。</b>超出部分没有参与判定——建议分段粘贴，每段单独查一遍。
+  </div>` : "";
+
+  out.innerHTML = truncHint + head + lexBlockHTML(r) + items + pending + clean + share +
+    `<div class="disc">${esc(r.disclaimer || "")}</div>`;
+}
+
+/* ---------- verify ---------- */
+/* ---------- 时效 ---------- */
+function srcAge(dateStr){
+  // 兼容 2024-11-08 / 2024/11/08 / 2024.11.08 三种写法
+  const s = String(dateStr || "").replace(/[./]/g, "-").slice(0, 10);
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(s)) return "";
+  const t = Date.parse(s.replace(/-/g, "/"));
+  if(isNaN(t)) return "";
+  const days = Math.floor((Date.now() - t) / 86400000);
+  if(days < 0 || days > 365 * 60) return "";
+  if(days === 0) return "今天";
+  if(days === 1) return "昨天";
+  if(days < 30) return days + " 天前";
+  if(days < 365) return Math.floor(days / 30) + " 个月前";
+  return Math.floor(days / 365) + " 年前";
+}
+
+function ageLevel(dateStr){
+  const s = String(dateStr || "").replace(/[./]/g, "-").slice(0, 10);
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(s)) return "";
+  const t = Date.parse(s.replace(/-/g, "/"));
+  if(isNaN(t)) return "";
+  const days = Math.floor((Date.now() - t) / 86400000);
+  if(days < 0) return "";
+  if(days <= 365) return "fresh";
+  if(days >= 365 * 3) return "old";
+  return "";
+}
+
+function agoText(sec){
+  sec = Number(sec || 0);
+  if(sec < 90) return "1 分钟内";
+  if(sec < 3600) return Math.floor(sec / 60) + " 分钟前";
+  if(sec < 86400) return Math.floor(sec / 3600) + " 小时前";
+  return Math.floor(sec / 86400) + " 天前";
+}
+
+function goCheckup(){
+  const text = $("#verifyInput").value.trim();
+  switchTab("checkup");
+  if(text){ $("#checkupInput").value = text; }
+  $("#checkupInput").focus();
+}
+
+function adoptedCount(d){
+  // 与判定层同一口径：企业信用只算政府/司法公示，其他只算高质来源
+  if(typeof d.usable_count === "number") return d.usable_count;
+  const ev = d.evidence || [];
+  return ev.filter(e => e.high_quality === true).length;
+}
+
+function renderVerify(out, d){
+  const v = d.verdict;
+  const isRealtime = d.claim && d.claim.claim_type === "realtime";
+  const isRefused = v.verdict === "refused";
+  const tone = isRefused ? "refused" : (isRealtime ? "pending" : (VERDICT_TONE[v.verdict] || "pending"));
+  const vLabel = isRealtime ? "实时信息" : v.label;
+  const ev = d.top_evidence && d.top_evidence.length ? d.top_evidence : d.evidence;
+  // 常识结论没有检索过，不能显示「本次为实时检索」。
+  // 不给「改用检索」按钮：搜索引擎不适合核实常识（搜「鸡蛋含蛋白质」会返回
+  // 《蛋白质吃得越多越好是谣言》，反而把对的判成错的）。
+  const ageNote = d.provider === "knowledge"
+    ? `<span class="ageok">通用知识 · 未检索</span>`
+    : (d.provider === "policy"
+    ? `<span class="agewarn">未检索 · 不在受理范围</span>`
+    : (d.cached && d.cached_age
+      ? `<span class="agewarn">本结果来自 ${agoText(d.cached_age)}的同题查询</span>
+         <button class="linkbtn" onclick="runVerify(true, true)">重新检索</button>`
+      : `<span class="ageok">本次为实时检索</span>`));
+  const isAd = d.claim && d.claim.claim_type === "ad_claim";
+  const switchHint = isAd ? `<div class="hintbar">
+    <b>这段更像「你要发布的文案」，而不是「别人说的一个说法」。</b>
+    文案体检会逐句扫违禁词、核验每句宣称的依据，并给出改法。
+    <button class="linkbtn" onclick="goCheckup()">切到文案体检 →</button>
+  </div>` : "";
+  const truncHint = d.truncated ? `<div class="hintbar" style="border-color:#e0a800;background:#fffbe6">
+    <b>只核查了前 200 字。</b>超出部分没有参与检索与判定——事实核查针对「一条说法」，请精简后再查。
+  </div>` : "";
+  const html = `<div class="freshbar">
+    ${d.queried_at ? `<span>检索时间 ${esc(d.queried_at)}</span>` : ""}
+    ${ageNote}
+  </div>
+  ${truncHint}
+  ${switchHint}
+  <div class="summary">
+    <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap">
+      <span class="badge ${tone}" style="font-size:15px;padding:6px 14px">${esc(vLabel)}</span>
+      <div style="flex:1;min-width:240px">
+        <h2 style="font-size:16px">${esc(v.reason)}</h2>
+        <div class="chips">
+          ${isRefused
+            ? '<span class="chip">未检索 · 一次都没有查</span><span class="chip">耗时 ' + d.elapsed + 's</span>'
+            : `<span class="chip" title="规则档位，不是概率：证据越硬分越高">置信度 ${v.confidence}</span>
+               ${d.provider === "knowledge"
+                 ? '<span class="chip low">通用知识 · 未检索</span>'
+                 : `<span class="chip">检索 ${d.searches} 次</span>`}
+               <span class="chip" title="所有检索命中的条目，含重复与低质来源">命中 ${d.evidence.length} 条</span>
+               <span class="chip" title="通过一手性、权威度、时效、利益相关四维筛选、可以进入判定的来源">可用 ${adoptedCount(d)} 条</span>
+               <span class="chip">耗时 ${d.elapsed}s</span>
+               ${d.conflict && d.conflict.length ? '<span class="chip mid">来源互相矛盾</span>' : ''}
+               ${d.demo ? '<span class="chip mid">演示数据</span>' : ''}`}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item ${tone === 'pending' ? 'pending' : tone}">
+    <div class="item-head">
+      <span class="badge ${tone === 'pending' ? 'pending' : tone}">${esc(vLabel)}</span>
+      <div class="sentence">${esc(d.claim.raw).slice(0,120)}</div>
+    </div>
+    ${isRefused ? `<div class="ev-list">
+      <div style="font-size:12px;color:#8b9099;margin-bottom:7px;letter-spacing:.06em">可以核查的范围</div>
+      <div class="ev-m">消费传言与科普说法（隔夜菜致癌、微波炉加热）、产品与广告宣称、企业信用（写清公司全称）、公共政策与实时信息。</div>
+      ${missingHTML(d.missing)}
+    </div>` : `<div class="ev-list">
+      <div style="font-size:12px;color:#8b9099;margin-bottom:7px;letter-spacing:.06em">关键依据 · 点击可核验</div>
+      ${evidenceHTML(ev, {snippet:true})}
+    </div>`}
+    ${isRefused ? "" : `<details class="exp" open>
+      <summary>查看取证过程与判决依据</summary>
+      <div class="exp-body">
+        ${missingHTML(d.missing)}
+        ${matrixHTML(d.matrix)}
+        ${conflictHTML(d.conflict)}
+        ${timelineHTML(d.timeline, d.origin_note)}
+        ${traceHTML(d.trace)}
+        <h4>指标口径</h4>
+        <p class="metricnote">
+          <b>置信度</b>是规则档位、不是概率：单一来源 55–60，两条以上官方依据 62 + 8×条数（上限 90），口径冲突 45。<br>
+          <b>命中</b>是检索返回的全部条目（含重复、自媒体、低质页）；<b>可用</b>是通过一手性、权威度、时效、利益相关四维筛选、能进入判定的来源。<br>
+          但「可用」不等于「能定论」：只有其中被明确认定为<b>官方定性</b>（辟谣、通报、检测结果）的，才用于给出真或假。<br>
+          <b>检索</b>是调用搜索接口的次数，<b>耗时</b>为整轮调查实际用时。
+        </p>
+      </div>
+    </details>`}
+    <div class="meta">
+      <span>引擎 ${esc(d.provider || "")}</span>
+      ${d.queried_at ? `<span>查询时间 ${esc(d.queried_at)}</span>` : ''}
+      ${d.tencent_sources ? `<span>腾讯生态信源 ${d.tencent_sources} 条</span>` : ''}
+      ${d.est && d.est.saved_pct ? `<span>摘要直供模型，估算省 ${d.est.saved_pct}% 文本</span>` : ''}
+      ${d.code ? `<span>核查编号 #${esc(d.code)}</span><a href="/q/${esc(d.code)}" target="_blank" style="color:#0052d9">可转发卡片 →</a><a href="/r/${esc(d.code)}" target="_blank" style="color:#0052d9">导出报告 →</a>` : ''}
+    </div>
+  </div>
+  <div class="disc">${esc(d.disclaimer || "")}</div>`;
+  out.innerHTML = html;
+}
+
+async function runVerify(force, skipCommon){
+  clearUpStatus("verify");
+  const text = $("#verifyInput").value.trim();
+  const out = $("#outVerify"), st = $("#statusVerify"), btn = $("#btnVerify");
+  if(text.length < 4){ out.innerHTML = '<div class="err">内容太短，请补充后再试。</div>'; return; }
+  btn.disabled = true; out.innerHTML = "";
+  st.classList.add("on"); st.textContent = "第一轮 · 广泛取证";
+  const t1 = setTimeout(()=>{ st.textContent = "第二轮 · 交叉验证"; }, 3500);
+  const t2 = setTimeout(()=>{ st.textContent = "第三轮 · 溯源一手材料"; }, 8000);
+
+  try{
+    const resp = await fetch("/api/verify", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({text, source: SRC, force: !!force, skip_common: !!skipCommon})
+    });
+    const data = await resp.json();
+    if(!resp.ok) throw new Error(data.error || "服务暂时不可用");
+    renderVerify(out, data);
+  }catch(e){
+    out.innerHTML = `<div class="err">出错了：${esc(e.message)}</div>`;
+  }finally{
+    clearTimeout(t1); clearTimeout(t2);
+    st.classList.remove("on"); st.textContent = "";
+    btn.disabled = false;
+  }
+}
+
+$("#btnCheckup").onclick = runCheckup;
+$("#btnVerify").onclick = runVerify;
+
+fetch("/api/health").then(r => r.json()).then(h => {
+  if(h.owner && h.owner.show_qr === false){
+    document.querySelectorAll("footer img.qr, .ft img").forEach(el => { el.remove(); });
+  }
+  if(!h.has_search_key){
+    const st = $("#statusCheckup");
+    st.classList.add("on");
+    st.innerHTML = "当前未配置检索密钥，界面用<b>演示数据</b>跑通；填入密钥后即为真实检索。";
+  }
+}).catch(()=>{});
+</script>
+<div id="dropMask" class="dropmask"><div>松开即可识别图片</div></div>
+</body>
+</html>

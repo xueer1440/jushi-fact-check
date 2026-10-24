@@ -1,0 +1,84 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1600px;height:1200px;background:#f3f5f8;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;position:relative;overflow:hidden}
+  .glow{position:absolute;width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle,rgba(0,82,217,.09),transparent 65%);top:-400px;right:-300px}
+  .topbar{position:absolute;top:0;left:0;right:0;height:10px;background:linear-gradient(90deg,#0052d9,#266fe8 55%,#2ba471)}
+  .wrap{position:absolute;inset:70px 90px 56px;display:flex;gap:70px}
+  .left{flex:1;display:flex;flex-direction:column}
+  .tag{display:inline-flex;align-items:center;gap:12px;font-size:25px;color:#0052d9;letter-spacing:.16em;background:#ecf2fe;border:1px solid #b8cef7;padding:10px 24px;border-radius:4px;align-self:flex-start;font-weight:600}
+  .tag b{width:14px;height:14px;background:#0052d9;border-radius:3px;display:block}
+  h1{margin-top:56px;font-size:148px;line-height:1.22;color:#0f1216;font-weight:900;letter-spacing:.01em}
+  h1 .hl{color:#0052d9}
+  .sub{margin-top:30px;font-size:34px;line-height:1.6;color:#5b6169;font-weight:500}
+  .sub b{color:#0f1216}
+  .point{margin-top:auto;display:flex;flex-direction:column;gap:16px}
+  .prow{display:flex;align-items:center;gap:16px;font-size:28px;color:#0f1216;font-weight:600}
+  .dot{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:900}
+  .dg{background:#2ba471}.db{background:#0052d9}.dr{background:#d54941}
+  .foot{margin-top:44px;border-top:1px solid #e7e9eb;padding-top:24px;display:flex;align-items:flex-end;justify-content:space-between}
+  .foot>div{min-width:0}
+  .brand{font-size:40px;color:#0f1216;font-weight:900;white-space:nowrap}
+  .brand i{font-style:normal;color:#0052d9}
+  .desc{font-size:20px;color:#8f959e;margin-top:9px;letter-spacing:.03em;white-space:nowrap}
+  .badge2{text-align:right;font-size:18px;color:#8f959e;line-height:1.6;white-space:nowrap;margin-left:auto;padding-left:24px}
+  .badge2 b{display:block;color:#0052d9;font-size:22px}
+  /* 结果卡 */
+  .card{flex:1.08;align-self:stretch;background:#fff;border:1px solid #e7e9eb;border-radius:12px;box-shadow:0 12px 40px rgba(15,18,22,.10);display:flex;flex-direction:column;overflow:hidden}
+  .chead{display:flex;justify-content:space-between;align-items:center;padding:22px 30px;border-bottom:1px solid #e7e9eb}
+  .chead .n{font-size:24px;font-weight:800;color:#0f1216}
+  .chead .n i{font-style:normal;color:#0052d9}
+  .chead .d{font-size:19px;color:#8f959e}
+  .cbody{padding:26px 30px;display:flex;flex-direction:column;gap:20px;flex:1}
+  .claim{font-size:29px;color:#0f1216;font-weight:700;line-height:1.5;background:#f3f5f8;border-radius:8px;padding:18px 22px}
+  .verdict{display:flex;align-items:center;gap:18px}
+  .vbadge{background:#d54941;color:#fff;font-size:34px;font-weight:900;border-radius:8px;padding:10px 26px;letter-spacing:.06em}
+  .vc{font-size:26px;color:#5b6169}
+  .vc b{color:#0f1216;font-size:30px}
+  .reason{font-size:22px;color:#5b6169;line-height:1.5;background:#fdf3f2;border-radius:8px;padding:12px 18px}
+  .src{border-top:1px dashed #e7e9eb;padding-top:18px}
+  .src .t{font-size:20px;color:#8f959e;letter-spacing:.08em;margin-bottom:12px}
+  .srow{display:flex;gap:12px;align-items:flex-start;padding:7px 0}
+  .srow .sn{flex:0 0 auto;font-size:19px;font-weight:800;color:#0052d9;background:#ecf2fe;border-radius:5px;padding:2px 10px;margin-top:2px}
+  .srow .st{font-size:23px;color:#0f1216;line-height:1.45}
+  .srow .st em{font-style:normal;display:block;font-size:19px;color:#8f959e;margin-top:2px}
+  .cfoot{padding:18px 30px;background:#f1faf5;border-top:1px solid #e7e9eb;font-size:21px;color:#2ba471;font-weight:700;white-space:nowrap}
+  .cfoot span{color:#0f1216;font-weight:600}
+</style></head><body>
+<div class="glow"></div><div class="topbar"></div>
+<div class="wrap">
+  <div class="left">
+    <div class="tag"><b></b>侦探赛道 · 查得到，信得过</div>
+    <h1>发布前，<br><span class="hl">先查实</span></h1>
+    <div class="sub">AI 编瞎话时特别自信——<br>所以核查要放在<b>发布之前</b>，而不是辟谣之后</div>
+    <div class="point">
+      <div class="prow"><div class="dot dg">✓</div>两个入口：一句话核查 · 整段文案体检</div>
+      <div class="prow"><div class="dot db">✓</div>每条结论都附可点开的原始来源</div>
+      <div class="prow"><div class="dot dr">✓</div>查不到就明说查不到——绝不硬编</div>
+    </div>
+    <div class="foot">
+      <div>
+        <div class="brand">据<i>实</i> · 发布前事实核查</div>
+        <div class="desc">免注册 · 浏览器打开即用 · 检索驱动：元宝搜索</div>
+      </div>
+      <div class="badge2"><b>1024 超能 Coding 周末</b>WorkBuddy 辅助开发</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="chead"><div class="n">据<i>实</i> · 结果卡 <i>#0160</i></div><div class="d">2026-10-24 · 线上实测</div></div>
+    <div class="cbody">
+      <div class="claim">「隔夜菜亚硝酸盐超标会致癌，<br>千万别吃」</div>
+      <div class="verdict"><div class="vbadge">假</div><div class="vc">置信度 <b>90</b> · 检索 <b>8</b> 次 · 来源 <b>6</b> 条</div></div>
+      <div class="reason">最高权威来源（中国互联网联合辟谣平台，权威度 5/5）明确否定该说法。</div>
+      <div class="src">
+        <div class="t">关键依据 · 点击可核验</div>
+        <div class="srow"><div class="sn">辟谣平台</div><div class="st">《吃剩饭剩菜会致癌?是时候告诉你真相了……》<em>中国互联网联合辟谣平台 · 权威度 5/5</em></div></div>
+        <div class="srow"><div class="sn">央广网</div><div class="st">《专家称隔夜菜没那么"毒" 亚硝酸盐含量变化不大》<em>2013 · 央广网</em></div></div>
+        <div class="srow"><div class="sn">央视</div><div class="st">《隔夜菜真致癌嗎?帶飯上班要注意啥》<em>2020 · 央视网</em></div></div>
+        <div class="srow"><div class="sn">新华网</div><div class="st">《过年吃剩菜，致癌风险真有那么大?科学储存指南来袭》<em>新华网客户端</em></div></div>
+      </div>
+    </div>
+    <div class="cfoot">✓ 真假由规则裁决，模型不下结论&nbsp;&nbsp;<span>同输入同输出 · 6 例回归</span></div>
+  </div>
+</div>
+</body></html>

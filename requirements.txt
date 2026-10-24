@@ -1,0 +1,6 @@
+flask>=3.0
+requests>=2.31
+tencentcloud-sdk-python>=3.0.1200
+qrcode>=7.4
+pillow>=10.0
+rapidocr-onnxruntime>=1.3

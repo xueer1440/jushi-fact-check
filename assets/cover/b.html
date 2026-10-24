@@ -1,0 +1,67 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1080px;height:1440px;background:#0a1f2e;font-family:"Microsoft YaHei","PingFang SC",sans-serif;position:relative;overflow:hidden}
+  .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,214,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(94,214,255,.07) 1px,transparent 1px);background-size:48px 48px}
+  .frame{position:absolute;inset:36px;border:6px solid #5ed6ff;box-shadow:12px 12px 0 rgba(94,214,255,.16)}
+  .corner{position:absolute;width:26px;height:26px;background:#5ed6ff}
+  .c1{top:24px;left:24px}.c2{top:24px;right:24px}.c3{bottom:24px;left:24px}.c4{bottom:24px;right:24px}
+  .inner{position:absolute;inset:80px 84px;display:flex;flex-direction:column}
+  .tag{display:inline-flex;align-items:center;gap:14px;font-size:26px;color:#5ed6ff;letter-spacing:.18em;border:3px solid #5ed6ff;padding:12px 22px;align-self:flex-start}
+  .tag b{width:16px;height:16px;background:#5ed6ff;display:block}
+  h1{margin-top:70px;font-size:104px;line-height:1.2;color:#f2fbff;font-weight:900}
+  h1 .hl{color:#ffd166}
+  .slogn{margin-top:26px;font-size:38px;color:#9fc3d8;line-height:1.6}
+  .box{margin-top:56px;border:4px dashed rgba(255,209,102,.65);padding:34px 32px;background:rgba(255,209,102,.06)}
+  .box .k{font-size:26px;color:#ffd166;letter-spacing:.14em;margin-bottom:16px}
+  .box .t{font-size:44px;color:#fff7e6;line-height:1.5;font-weight:700}
+  .box .n{margin-top:14px;font-size:26px;color:#b9a987;line-height:1.6}
+  .foot{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;border-top:3px solid rgba(94,214,255,.3);padding-top:26px}
+  .brand{font-size:52px;color:#f2fbff;font-weight:900}
+  .brand i{font-style:normal;color:#5ed6ff}
+  .desc{font-size:26px;color:#84a8bd;margin-top:8px}
+  .badge{text-align:right;font-size:24px;color:#84a8bd;line-height:1.7}
+  .badge b{display:block;color:#ffd166;font-size:30px}
+
+  .cmp{display:flex;gap:18px;margin-top:40px}
+  .col{flex:1;border:3px solid rgba(255,255,255,.18);padding:24px 22px}
+  .col.bad{border-color:rgba(255,138,138,.5);background:rgba(255,138,138,.05)}
+  .col.good{border-color:rgba(255,209,102,.6);background:rgba(255,209,102,.07)}
+  .col .h{font-size:24px;letter-spacing:.12em;color:#9fc3d8}
+  .col.bad .h{color:#ff8a8a}
+  .col.good .h{color:#ffd166}
+  .col .v{font-size:32px;color:#f2fbff;font-weight:800;margin-top:14px;line-height:1.4}
+  .col .s{font-size:22px;color:#9fc3d8;margin-top:12px;line-height:1.6}
+</style></head><body>
+<div class="grid"></div><div class="frame"></div>
+<div class="corner c1"></div><div class="corner c2"></div><div class="corner c3"></div><div class="corner c4"></div>
+<div class="inner">
+  <div class="tag"><b></b>真实罚单 · 可点开来源</div>
+  <h1>海报上写这四个字<br><span class="hl">罚了二十万</span></h1>
+  <div class="slogn">「日本引进」「一盒让三年疼痛消失」<br>词库查不出来——那不是用词，是句谎</div>
+  <div class="box">
+    <div class="k">查证结果</div>
+    <div class="t">假 · 置信度 70</div>
+    <div class="n">4 条查处来源｜市场监管总局违法广告典型案例</div>
+  </div>
+  <div class="cmp">
+    <div class="col bad">
+      <div class="h">词库工具</div>
+      <div class="v">只会查"词"</div>
+      <div class="s">不在任何违禁词库里 → 查不出来</div>
+    </div>
+    <div class="col good">
+      <div class="h">据实</div>
+      <div class="v">查这句话有没有被处罚过</div>
+      <div class="s">→ 假 · 置信度 70，4 条查处来源</div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>
+      <div class="brand">据<i>实</i></div>
+      <div class="desc">发布前事实核查 · 元宝搜索驱动</div>
+    </div>
+    <div class="badge"><b>免注册</b>浏览器打开即用</div>
+  </div>
+</div>
+</body></html>

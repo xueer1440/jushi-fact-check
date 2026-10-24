@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>战绩页 · 据实</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230052d9'/%3E%3Ctext x='16' y='22' font-size='17' font-weight='600' text-anchor='middle' fill='%23fff' font-family='PingFang SC,sans-serif'%3E据%3C/text%3E%3C/svg%3E">
+<style>
+:root{--ink:#eef2f8;--ink2:#a6adb8;--ink3:#8f959e;--line:#2a2f36;--brand:#4d8dff;--red:#f06b61;--amber:#f0a04b;--green:#3fbf85}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#0f1216;color:#eef2f8;line-height:1.6;min-height:100vh}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 20px 48px}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+h1{font-size:26px;font-weight:700;letter-spacing:.5px}
+h1 span{color:#4d8dff}
+.sub{color:#8f959e;font-size:13px;margin-top:4px}
+.live{font-size:12px;color:#5f6a7a;display:flex;align-items:center;gap:6px}
+.pulse{width:7px;height:7px;border-radius:50%;background:#28c76f;box-shadow:0 0 0 0 rgba(40,199,111,.6);animation:p 2s infinite}
+@keyframes p{0%{box-shadow:0 0 0 0 rgba(40,199,111,.5)}70%{box-shadow:0 0 0 9px rgba(40,199,111,0)}100%{box-shadow:0 0 0 0 rgba(40,199,111,0)}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:14px;margin-bottom:22px}
+.kpi{background:#171a1f;border:1px solid #262b31;border-radius:14px;padding:16px 18px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#0052d9,#4d8dff);opacity:.85}
+.kpi .n{font-size:32px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.kpi .l{font-size:12.5px;color:#8f959e;margin-top:2px}
+.kpi .bar{height:4px;background:#262b31;border-radius:99px;margin-top:10px;overflow:hidden}
+.kpi .bar i{display:block;height:100%;background:linear-gradient(90deg,#0052d9,#4d8dff);width:0;transition:width .6s}
+.kpi .t{font-size:11.5px;color:#5f6a7a;margin-top:5px}
+.two{display:grid;grid-template-columns:1.15fr 1fr;gap:16px}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+.panel{background:#171a1f;border:1px solid #262b31;border-radius:14px;padding:18px}
+.panel h2{font-size:14px;color:#8f959e;font-weight:600;margin-bottom:12px;letter-spacing:.5px}
+.hot{list-style:none}
+.hot li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #202939;font-size:13.5px}
+.hot li:last-child{border:0}
+.hot .c{color:#4d8dff;font-variant-numeric:tabular-nums;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid #202939;vertical-align:top}
+th{color:#5f6a7a;font-weight:600;font-size:11.5px}
+td.mono{font-variant-numeric:tabular-nums;color:#8f959e;white-space:nowrap}
+.v{font-size:11px;padding:1px 7px;border-radius:5px;font-weight:600;white-space:nowrap}
+.v.high,.v.false{background:#3a1a1a;color:#ff8f8f}
+.v.mid,.v.unclear{background:#3a2c14;color:#ffc46b}
+.v.low,.v.true{background:#12301f;color:#71d69b}
+.v.pending,.v.no_source{background:#242c3a;color:#9aa6b8}
+.empty{color:#5f6a7a;font-size:13px;padding:10px 0}
+.vd{display:flex;flex-direction:column;gap:9px}
+.vrow{display:grid;grid-template-columns:96px 1fr 58px;align-items:center;gap:10px;font-size:12.5px}
+.vrow .name{color:#a6adb8;text-align:right;white-space:nowrap}
+.vrow .track{height:14px;background:#202939;border-radius:99px;overflow:hidden}
+.vrow .fill{display:block;height:100%;border-radius:99px;width:0;transition:width .6s}
+.vrow .num{color:#8f959e;font-variant-numeric:tabular-nums;white-space:nowrap}
+.foot{margin-top:22px;color:#5f6a7a;font-size:11.5px;line-height:1.7}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;background:#202939;padding:1px 5px;border-radius:4px;color:#9fb6d8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>据实 · <span>战绩页</span></h1>
+      <div class="sub">所有数字来自本地数据库，检索次数可直接与腾讯云控制台调用量对账</div>
+    </div>
+    <div class="live"><span class="pulse"></span><span id="stamp">连接中…</span></div>
+  </header>
+
+  <div class="grid">
+    <div class="kpi"><div class="n" id="kTotal">0</div><div class="l">累计查证</div>
+      <div class="bar"><i id="bTotal"></i></div><div class="t" id="tTotal">目标 60 次</div></div>
+    <div class="kpi"><div class="n" id="kVisitors">0</div><div class="l">独立访客</div>
+      <div class="bar"><i id="bVisitors"></i></div><div class="t" id="tVisitors">目标 25 人</div></div>
+    <div class="kpi"><div class="n" id="kSearch">0</div><div class="l">元宝搜索调用</div><div class="t">仅真实调用，可与云端账单对账</div></div>
+    <div class="kpi"><div class="n" id="kSources">0</div><div class="l">累计来源数</div><div class="t" id="tAvg">平均 0 条/次</div></div>
+    <div class="kpi"><div class="n" id="kToday">0</div><div class="l">今日查证</div><div class="t" id="tTodayV">今日访客 0</div></div>
+    <div class="kpi"><div class="n" id="kRefuse">0%</div><div class="l">拒答率</div><div class="t">越高越说明它不瞎编</div></div>
+  </div>
+
+  <div class="two">
+    <div class="panel">
+      <h2>最近的查证</h2>
+      <table>
+        <thead><tr><th>编号</th><th>内容</th><th>结论</th><th>检索</th><th>时间</th></tr></thead>
+        <tbody id="recent"><tr><td colspan="5" class="empty">还没有记录</td></tr></tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <h2>热门查证 Top 5</h2>
+      <ul class="hot" id="hot"><li><span class="c">—</span><span>还没有数据</span></li></ul>
+      <h2 style="margin-top:18px">来源渠道（哪个渠道来的人）</h2>
+      <ul class="hot" id="src"><li><span class="c">—</span><span>还没有数据</span></li></ul>
+      <div class="foot">
+        数据实时来自 <code>/api/stats</code>，任何人可打开接口自行核对。
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px">
+    <h2>判定分布 · 五档结论都查了来源才落档</h2>
+    <div class="vd" id="verdictChart"><div class="empty">还没有数据</div></div>
+    <div class="foot" style="margin-top:12px">
+      「说不准 + 没查到」合计即拒答率；「拒答·边界」是隐私/时政类问题主动不查；体检类按高风险句数分「有风险 / 无硬伤」。分布随每次查证实时变化。
+    </div>
+  </div>
+
+  <div class="foot">
+    仅统计查证记录与访问来源，不含任何个人信息；过长内容截断显示。
+  </div>
+</div>
+<script>
+const LBL = {"true":"真","false":"假",misleading:"误导",unclear:"说不准",no_source:"没查到"};
+const TONE = {"true":"true","false":"false",unclear:"unclear",no_source:"no_source"};
+async function tick(){
+  try{
+    const r = await fetch("/api/stats");
+    const d = await r.json();
+    $("#kTotal").textContent = d.total_checks;
+    $("#kVisitors").textContent = d.visitors_total;
+    $("#kSearch").textContent = (d.real_searches != null ? d.real_searches : d.total_searches);
+    $("#kSources").textContent = d.total_sources;
+    $("#kToday").textContent = d.today_checks;
+    $("#kRefuse").textContent = d.refusal_rate + "%";
+    $("#tAvg").textContent = "平均 " + d.avg_sources + " 条/次";
+    $("#tTodayV").textContent = "今日访客 " + d.visitors_today;
+    $("#bTotal").style.width = Math.min(100, d.total_checks / d.target_checks * 100) + "%";
+    $("#bVisitors").style.width = Math.min(100, d.visitors_total / d.target_visitors * 100) + "%";
+    $("#tTotal").textContent = "目标 " + d.target_checks + " 次（" + d.total_checks + "）";
+    $("#tVisitors").textContent = "目标 " + d.target_visitors + " 人（" + d.visitors_total + "）";
+    $("#stamp").textContent = "实时 · " + d.generated_at.replace("T"," ");
+
+    const rows = (d.recent||[]).map(x => {
+      let v = x.verdict || "";
+      if(v.startsWith("high:")){ const n = v.split(":")[1]; v = n === "0" ? "low" : "high"; }
+      const label = v === "high" ? "有风险" : v === "low" ? "无硬伤" : (LBL[v] || v);
+      return `<tr>
+        <td class="mono">#${x.code}</td>
+        <td>${esc(x.text)}</td>
+        <td><span class="v ${TONE[v] || v}">${label}</span></td>
+        <td class="mono">${x.searches}</td>
+        <td class="mono">${(x.created_at||"").slice(5,16).replace("T"," ")}</td>
+      </tr>`;
+    }).join("");
+    $("#recent").innerHTML = rows || '<tr><td colspan="5" class="empty">还没有记录</td></tr>';
+
+    const hot = (d.hot||[]).map(h => `<li><span>${esc(h.text)}</span><span class="c">${h.count}</span></li>`).join("");
+    $("#hot").innerHTML = hot || '<li><span class="c">—</span><span>还没有数据</span></li>';
+
+    const src = (d.by_source||[]).map(s => `<li><span>${esc(s.source)}<span style="color:#5f6a7a"> · ${s.visitors} 人</span></span><span class="c">${s.checks}</span></li>`).join("");
+    $("#src").innerHTML = src || '<li><span class="c">—</span><span>还没有数据</span></li>';
+
+    const VDEF = [
+      ["true","真","#3fbf85"],
+      ["false","假","#f06b61"],
+      ["misleading","误导","#f0a04b"],
+      ["unclear","说不准","#f5cf6b"],
+      ["no_source","没查到","#9aa6b8"],
+      ["refused","拒答·边界","#c39bd3"],
+      ["checkup_risk","体检·有风险","#ff8f8f"],
+      ["checkup_ok","体检·无硬伤","#71d69b"]
+    ];
+    const vmap = {}; let vtotal = 0;
+    (d.by_verdict||[]).forEach(x => { vmap[x.verdict] = x.checks; vtotal += x.checks; });
+    const vrows = VDEF.filter(v => vmap[v[0]]).map(([k, label, color]) => {
+      const n = vmap[k] || 0;
+      const w = vtotal ? Math.max(2, Math.round(n / vtotal * 1000) / 10) : 0;
+      return `<div class="vrow"><span class="name">${label}</span><span class="track"><span class="fill" style="width:${w}%;background:${color}"></span></span><span class="num">${n} 次</span></div>`;
+    }).join("");
+    $("#verdictChart").innerHTML = vrows || '<div class="empty">还没有数据</div>';
+  }catch(e){
+    $("#stamp").textContent = "连接断开，10 秒后重试";
+  }
+}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const $ = s => document.querySelector(s);
+tick(); setInterval(tick, 5000);
+</script>
+</body>
+</html>

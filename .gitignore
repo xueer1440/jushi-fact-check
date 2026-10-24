@@ -1,0 +1,15 @@
+.venv/
+.env
+data/
+__pycache__/
+*.pyc
+*.log
+
+# 大文件 / 二进制素材（录屏、备份文档）不入库
+*.mp4
+*.mov
+*.avi
+*.zip
+*.rar
+.DS_Store
+Thumbs.db
