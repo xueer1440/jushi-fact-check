@@ -1,7 +1,7 @@
 # workbuddy.md · 开发对话记录
 
 > 作品：据实 · 发布前事实核查（1024 超能 Coding 周末 · 侦探赛道）
-> 开发工具：WorkBuddy（Agent 模式，全程对话式开发）
+> 开发工具：WorkBuddy（Agent 模式，辅助开发）
 > 开发窗口：2026-10-22 — 2026-10-25
 > 作者：曾艳（zengyan）
 

@@ -1,7 +1,7 @@
 # workbuddy.md · 开发对话记录
 
 > 作品：据实 · 发布前事实核查（1024 超能 Coding 周末 · 侦探赛道）
-> 开发方式：WorkBuddy Agent 模式，全程对话式开发（需求、架构、改 bug、写材料均在对话中收敛）
+> 开发方式：WorkBuddy 辅助开发（Agent 模式，需求、架构、改 bug、写材料均在对话中收敛）
 > 开发窗口：2026-10-22 — 2026-10-24
 > 线上：<https://jushi-fact-check.app.workbuddy.host/?sharecode=T3NGFV6FVO>
 > 这份记录只写**开发过程**：架构决策、踩过的坑、改过的代码、跑过的测试。产品文案与投稿材料的取舍不在此列。
